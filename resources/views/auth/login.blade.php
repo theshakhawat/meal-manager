@@ -107,13 +107,13 @@
 
         <!-- Social Login Buttons -->
         <div class="grid grid-cols-2 gap-3 mb-6">
-            <a href=""
-                class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-slate-200 dark:border-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-800/60 transition-colors text-xs sm:text-sm font-medium text-slate-700 dark:text-zinc-300">
+            <a href="{{ route('auth.google') }}"
+                class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-slate-200 dark:border-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-800/60 transition-colors text-xs sm:text-sm font-medium text-slate-700 dark:text-zinc-300 shadow-sm">
                 <i class="fa-brands fa-google text-red-500 text-sm sm:text-base"></i>
                 <span>Google</span>
             </a>
-            <a href=""
-                class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-slate-200 dark:border-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-800/60 transition-colors text-xs sm:text-sm font-medium text-slate-700 dark:text-zinc-300">
+            <a href="{{ route('auth.github') }}"
+                class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl border border-slate-200 dark:border-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-800/60 transition-colors text-xs sm:text-sm font-medium text-slate-700 dark:text-zinc-300 shadow-sm">
                 <i class="fa-brands fa-github text-slate-900 dark:text-white text-sm sm:text-base"></i>
                 <span>GitHub</span>
             </a>

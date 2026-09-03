@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'email', 'password', 'phone', 'photo', 'google_id', 'github_id'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -29,4 +29,18 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function getAvatarUrlAttribute(): string
+    {
+        if ($this->photo) {
+            if (filter_var($this->photo, FILTER_VALIDATE_URL)) {
+                return $this->photo;
+            }
+            if (file_exists(public_path('uploads/avatars/' . $this->photo))) {
+                return asset('uploads/avatars/' . $this->photo);
+            }
+        }
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->name ?? 'Admin') . '&background=166534&color=fff&bold=true';
+    }
 }
+

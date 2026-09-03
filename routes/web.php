@@ -13,19 +13,19 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
     Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
     Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+    Route::get('/auth/google', [AuthController::class, 'redirectToGoogle'])->name('auth.google');
+    Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
+    Route::get('/auth/github', [AuthController::class, 'redirectToGitHub'])->name('auth.github');
+    Route::get('/auth/github/callback', [AuthController::class, 'handleGitHubCallback'])->name('auth.github.callback');
 });
 
 
-Route::middleware(['auth','role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-});
-
-
-Route::middleware(['auth','role:member'])->prefix('member')->name('member.')->group(function () {
-    Route::get('/dashboard', [MemberController::class, 'index'])->name('dashboard');
-    Route::get('/profile', [MemberController::class, 'profile'])->name('profile');
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::put('/profile', [AdminController::class, 'updateProfile'])->name('profile.update');
+    Route::get('/change-password', [AdminController::class, 'changePassword'])->name('change-password');
+    Route::put('/change-password', [AdminController::class, 'updatePassword'])->name('change-password.update');
+    Route::match(['post', 'delete'], '/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
